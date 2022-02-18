@@ -96,7 +96,7 @@ def play(game, x_player, o_player, print_game):
 
     while game.empty_squares():
         # getting the move from the correct player
-        if letter == '0':
+        if letter == 'O':
             square = o_player.get_move(game)
         else:
             square = x_player.get_move(game)
@@ -104,7 +104,7 @@ def play(game, x_player, o_player, print_game):
         # making the move
         if game.make_move(square, letter):
             if print_game:
-                print(letter + ' makes a move to squrare {square}')
+                print(letter + ' makes a move to square' + ' ' + str(square))
                 game.print_board()
                 print('')
 
@@ -115,12 +115,12 @@ def play(game, x_player, o_player, print_game):
         
         # alterning letters after the move
         if letter == 'X':
-            letter == 'O'
+            letter = 'O'
         else:
-            letter == 'X'
+            letter = 'X'
         
-        if print_game:
-            print("It's a tie.")
+        # if print_game:
+        #    print("It's a tie.")
 
 if __name__  == '__main__':
     x_player = HumanPlayer('X')
