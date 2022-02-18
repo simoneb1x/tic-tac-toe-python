@@ -1,5 +1,6 @@
 # Tic Tac Toe
-Simple Tic Tac Toe developed in Python.
+Simple Tic Tac Toe developed in Python. 
+You can decide to play alone against the computer or in multiplayer!
 
 # How to play
 
@@ -11,6 +12,5 @@ python3 game.py
 ```
 4. Play on the CLI! (GUIs are outdated)
 
-# Next developments
-
-For the moment you can play against the computer, which makes random choices on the board. For the future I would like to develop a multiplayer mode.
+# How to choose between Singleplayer and Multiplayer
+When asked, enter 's' (without quotes) if you want to play singleplayer, 'm' if you want to play multiplayer.
