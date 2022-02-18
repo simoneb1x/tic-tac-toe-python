@@ -89,16 +89,6 @@ def start():
     mode = False
 
     print("Welcome to TicTacToe! Do you want to play Singleplayer or Multiplayer?:")
-    """
-    choose = input("Choose S or M.")
-    if choose != "S" and choose != "M":
-        raise ValueError("Bad choice. You have to choose between S or M.")
-    
-    choose = choose.upper()
-
-    return choose
-    """
-
 
     # As long as the variable 'mode' remains at False, the loop is repeated.
     # The only reason it can remain at False is because the user has not selected the correct mode (S or M).
@@ -118,13 +108,8 @@ def start():
 
     
     return mode
-    
 
 def play(game, x_player, o_player, print_game):
-
-    mode = start()
-
-    if mode == "S":
         if print_game:
             game.print_board_nums()
 
@@ -164,11 +149,16 @@ def play(game, x_player, o_player, print_game):
             
             # if print_game:
             #    print("It's a tie.")
-    else:
-        print("Multiplayer mode needs to be developed!")
 
 if __name__  == '__main__':
-    x_player = HumanPlayer('X')
-    o_player = RandomComputerPlayer('O')
-    t = TicTacToe()
-    play(t, x_player, o_player, print_game=True)
+    game_mode = start()
+    if game_mode == "S":
+        x_player = HumanPlayer('X')
+        o_player = RandomComputerPlayer('O')
+        t = TicTacToe()
+        play(t, x_player, o_player, print_game=True)
+    else:
+        x_player = HumanPlayer('X')
+        o_player = HumanPlayer('O')
+        t = TicTacToe()
+        play(t, x_player, o_player, print_game=True)
