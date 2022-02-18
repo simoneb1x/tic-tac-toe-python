@@ -24,7 +24,9 @@ class RandomComputerPlayer(Player):
         super().__init__(letter)
     
     def get_move(self, game):
-        pass
+        # Gets a random spot for the next move
+        square = random.choice(game.available_moves())
+        return square 
 
 """
 For inheritance, there's another class for human player
@@ -34,4 +36,13 @@ class HumanPlayer(Player):
         super().__init__(letter)
     
     def get_move(self, game):
-        pass
+        valid_square = False
+        val = None
+        while not valid_square:
+            square = input(self.letter + '\'s turn. Input move (0-9)'):
+            """ 
+            Checks if the value is correct.
+            If the value isn't an integer, then it's invalid.
+            Elif the spot is not available on the board, then it's invalid.
+            """
+            pass
