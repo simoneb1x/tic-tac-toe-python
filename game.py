@@ -20,4 +20,11 @@ class TicTacToe:
         number_board = [[str(i) for i in range(j*3, (j+1)*3)] for j in range(3)]
         for row in number_board:
             print("| " + " | ".join(row) + " |") 
-             
+    
+    def available_moves(self):
+        moves = []
+        for (i, spot) in enumerate(self.board):
+            # ['x', 'x', 'o'] ---> [(0, 'x'), (1, 'x') (2, 'o')]
+            if spot == ' ':
+                moves.append(i)
+        return moves
