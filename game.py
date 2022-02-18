@@ -101,6 +101,7 @@ def play(game, x_player, o_player, print_game):
         else:
             square = x_player.get_move(game)
 
+
         # making the move
         if game.make_move(square, letter):
             if print_game:
