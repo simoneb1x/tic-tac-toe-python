@@ -3,6 +3,7 @@ Defining a class for the game.
 By definition, it will have a 3x3 board represented by a single list.
 """
 
+from multiprocessing.sharedctypes import Value
 from random import Random
 from player import HumanPlayer, RandomComputerPlayer
 
@@ -82,46 +83,65 @@ class TicTacToe:
 """
 Returns the winner of the game or None for a tie
 """
+def start():
+    print("Welcome to TicTacToe! Do you want to play Singleplayer or Multiplayer?:")
+    choose = input("Choose S or M.")
+
+    try:
+        choose = choose.upper()
+        if choose != "S" or choose != "M":
+            raise ValueError("Bad choice. You have to choose between S or M.")
+    except ValueError:
+        print("Please, try again.")
+
+    return choose
+
 def play(game, x_player, o_player, print_game):
-    if print_game:
-        game.print_board_nums()
 
-    # Starting letter
-    letter = 'X'
+    mode = start()
 
-    """
-    There will be an iteration till the game has empty squares.
-    The winner will be returned when the loop will be broken
-    """
+    if mode == "S":
+        if print_game:
+            game.print_board_nums()
 
-    while game.empty_squares():
-        # getting the move from the correct player
-        if letter == 'O':
-            square = o_player.get_move(game)
-        else:
-            square = x_player.get_move(game)
+        # Starting letter
+        letter = 'X'
+
+        """
+        There will be an iteration till the game has empty squares.
+        The winner will be returned when the loop will be broken
+        """
+
+        while game.empty_squares():
+            # getting the move from the correct player
+            if letter == 'O':
+                square = o_player.get_move(game)
+            else:
+                square = x_player.get_move(game)
 
 
-        # making the move
-        if game.make_move(square, letter):
-            if print_game:
-                print(letter + ' makes a move to square' + ' ' + str(square))
-                game.print_board()
-                print('')
+            # making the move
+            if game.make_move(square, letter):
+                if print_game:
+                    print(letter + ' makes a move to square' + ' ' + str(square))
+                    game.print_board()
+                    print('')
 
-        if game.current_winner:
-            if print_game:
-                print(letter + ' wins!')
-            return letter
-        
-        # alterning letters after the move
-        if letter == 'X':
-            letter = 'O'
-        else:
-            letter = 'X'
-        
-        # if print_game:
-        #    print("It's a tie.")
+            if game.current_winner:
+                if print_game:
+                    print(letter + ' wins!')
+                return letter
+            
+            # alterning letters after the move
+            if letter == 'X':
+                letter = 'O'
+            else:
+                letter = 'X'
+            
+            # if print_game:
+            #    print("It's a tie.")
+    else:
+        print("Multiplayer mode needs to be developed!")
 
 if __name__  == '__main__':
     x_player = HumanPlayer('X')
