@@ -110,45 +110,47 @@ def start():
     return mode
 
 def play(game, x_player, o_player, print_game):
-        if print_game:
-            game.print_board_nums()
+    if print_game:
+        game.print_board_nums()
 
-        # Starting letter
-        letter = 'X'
+    # Starting letter
+    letter = 'X'
 
-        """
-        There will be an iteration till the game has empty squares.
-        The winner will be returned when the loop will be broken
-        """
+    """
+    There will be an iteration till the game has empty squares.
+    The winner will be returned when the loop will be broken
+    """
 
-        while game.empty_squares():
-            # getting the move from the correct player
-            if letter == 'O':
-                square = o_player.get_move(game)
-            else:
-                square = x_player.get_move(game)
+    while game.empty_squares():
+        # getting the move from the correct player
+        if letter == 'O':
+            square = o_player.get_move(game)
+        else:
+            square = x_player.get_move(game)
 
 
-            # making the move
-            if game.make_move(square, letter):
-                if print_game:
-                    print(letter + ' makes a move to square' + ' ' + str(square))
-                    game.print_board()
-                    print('')
+        # making the move
+        if game.make_move(square, letter):
+            if print_game:
+                print(letter + ' makes a move to square' + ' ' + str(square))
+                game.print_board()
+                print('')
 
-            if game.current_winner:
-                if print_game:
-                    print(letter + ' wins!')
-                return letter
-            
-            # alterning letters after the move
-            if letter == 'X':
-                letter = 'O'
-            else:
-                letter = 'X'
-            
-            # if print_game:
-            #    print("It's a tie.")
+        if game.current_winner:
+            if print_game:
+                print(letter + ' wins!')
+            return letter
+        
+        # alterning letters after the move
+        if letter == 'X':
+            letter = 'O'
+        else:
+            letter = 'X'
+        
+        # if print_game:
+        #    print("It's a tie.")
+    
+    print("It's a tie!")
 
 if __name__  == '__main__':
     game_mode = start()
