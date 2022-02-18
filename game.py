@@ -3,6 +3,7 @@ Defining a class for the game.
 By definition, it will have a 3x3 board represented by a single list.
 """
 
+from multiprocessing.sharedctypes import Value
 from random import Random
 from player import HumanPlayer, RandomComputerPlayer
 
@@ -82,6 +83,32 @@ class TicTacToe:
 """
 Returns the winner of the game or None for a tie
 """
+def start():
+    # I initialize this variable to store the mode (singleplayer or multiplayer)
+    # It is initialized as false.
+    mode = False
+
+    print("Welcome to TicTacToe! Do you want to play Singleplayer or Multiplayer?:")
+
+    # As long as the variable 'mode' remains at False, the loop is repeated.
+    # The only reason it can remain at False is because the user has not selected the correct mode (S or M).
+    
+    while not mode:
+        choose = input("Choose S or M.")
+
+        try:
+            choose = choose.upper()
+
+            if choose != "S" and choose != "M":
+                raise ValueError("Bad choice. You have to choose between S or M.")
+
+            mode = choose
+        except ValueError:
+            print("Please, try again.")
+
+    
+    return mode
+
 def play(game, x_player, o_player, print_game):
     if print_game:
         game.print_board_nums()
@@ -122,9 +149,18 @@ def play(game, x_player, o_player, print_game):
         
         # if print_game:
         #    print("It's a tie.")
+    
+    print("It's a tie!")
 
 if __name__  == '__main__':
-    x_player = HumanPlayer('X')
-    o_player = RandomComputerPlayer('O')
-    t = TicTacToe()
-    play(t, x_player, o_player, print_game=True)
+    game_mode = start()
+    if game_mode == "S":
+        x_player = HumanPlayer('X')
+        o_player = RandomComputerPlayer('O')
+        t = TicTacToe()
+        play(t, x_player, o_player, print_game=True)
+    else:
+        x_player = HumanPlayer('X')
+        o_player = HumanPlayer('O')
+        t = TicTacToe()
+        play(t, x_player, o_player, print_game=True)
