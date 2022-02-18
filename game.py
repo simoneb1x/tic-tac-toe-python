@@ -84,17 +84,41 @@ class TicTacToe:
 Returns the winner of the game or None for a tie
 """
 def start():
-    print("Welcome to TicTacToe! Do you want to play Singleplayer or Multiplayer?:")
-    choose = input("Choose S or M.")
+    # I initialize this variable to store the mode (singleplayer or multiplayer)
+    # It is initialized as false.
+    mode = False
 
-    try:
-        choose = choose.upper()
-        if choose != "S" or choose != "M":
-            raise ValueError("Bad choice. You have to choose between S or M.")
-    except ValueError:
-        print("Please, try again.")
+    print("Welcome to TicTacToe! Do you want to play Singleplayer or Multiplayer?:")
+    """
+    choose = input("Choose S or M.")
+    if choose != "S" and choose != "M":
+        raise ValueError("Bad choice. You have to choose between S or M.")
+    
+    choose = choose.upper()
 
     return choose
+    """
+
+
+    # As long as the variable 'mode' remains at False, the loop is repeated.
+    # The only reason it can remain at False is because the user has not selected the correct mode (S or M).
+    
+    while not mode:
+        choose = input("Choose S or M.")
+
+        try:
+            choose = choose.upper()
+
+            if choose != "S" and choose != "M":
+                raise ValueError("Bad choice. You have to choose between S or M.")
+
+            mode = choose
+        except ValueError:
+            print("Please, try again.")
+
+    
+    return mode
+    
 
 def play(game, x_player, o_player, print_game):
 
